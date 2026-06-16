@@ -1,5 +1,6 @@
 <script setup>
 import HomeCatalogSearchInput from '@/components/home-catalog/HomeCatalogSearchInput.vue'
+import FooterComponent from '@/components/footer/FooterComponent.vue'
 </script>
 
 <template>
@@ -10,4 +11,6 @@ import HomeCatalogSearchInput from '@/components/home-catalog/HomeCatalogSearchI
 </div>
   <main>
   </main>
+
+  <FooterComponent />
 </template>
