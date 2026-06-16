@@ -1,5 +1,6 @@
 <script setup>
 import LoginButton from '../components/login/LoginButton.vue'
+import PaginationHub from '../components/pagination/PaginationHub.vue'
 </script>
 
 <template>
@@ -9,7 +10,8 @@ import LoginButton from '../components/login/LoginButton.vue'
   <LoginButton />
 
   <main>
-  
+    <PaginationHub />
+
   </main>
 
 </template>
