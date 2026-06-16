@@ -1,7 +1,5 @@
 <script setup>
-import AnimeCard from '@/components/card/AnimeCard.vue';
-
-
+import AnimeCard from '@/components/card/AnimeCard.vue'
 </script>
 
 <template>

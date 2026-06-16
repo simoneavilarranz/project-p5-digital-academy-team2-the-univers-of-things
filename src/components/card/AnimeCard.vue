@@ -1,4 +1,6 @@
 <script setup>
+import FavoriteButton from './FavoriteButton.vue';
+
 </script>
 
 <template>
@@ -18,7 +20,7 @@
                 or revenge for his old wounds.</p>
             <div class="card-buttons">
                 <a href="" class="btn btn-primary">See more</a>
-                <a href="" class="btn btn-secondary">❤️</a>
+                <FavoriteButton />
             </div>
         </div>
     </div>
