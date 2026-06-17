@@ -1,5 +1,5 @@
 <script setup>
-import FavoriteButton from '@/components/card/FavoriteButton.vue';
+import FavoriteButton from './FavoriteButton.vue';
 
 </script>
 
