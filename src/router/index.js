@@ -10,17 +10,23 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
     },
-
     {
       path: '/login',
       name: 'login',
       component: LoginView,
     },
-
     {
       path: '/admin/usuarios',
       name: 'admin-users',
       component: () => import('@/views/AdminUsersView.vue'),
+    },
+    // ==========================================
+    // ¡AÑADE ESTA NUEVA RUTA AQUÍ ABAJO!
+    // ==========================================
+    {
+      path: '/admin/destacados',
+      name: 'admin-featured',
+      component: () => import('@/views/AdminFeaturedView.vue'),
     }
   ],
 })
