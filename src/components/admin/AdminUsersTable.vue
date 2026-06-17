@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 
-// Mock data con los datos exactos de tu captura de Figma
+// Lista de usuarios con estados e iniciales preparadas
 const users = ref([
-  { id: 1, name: 'Akira Admin', email: 'admin@otakuhub.dev', role: 'admin', allowed: true, avatar: 'https://avatar.iran.liara.run/public/git/boy' },
-  { id: 2, name: 'Sora Tanaka', email: 'user@otakuhub.dev', role: 'customer', allowed: true, avatar: 'https://avatar.iran.liara.run/public/git/girl' },
-  { id: 3, name: 'Ken Restricted', email: 'blocked@otakuhub.dev', role: 'customer', allowed: false, avatar: 'https://avatar.iran.liara.run/public/30' }
+  { id: 1, name: 'Akira Admin', email: 'admin@otakuhub.dev', role: 'admin', allowed: true },
+  { id: 2, name: 'Sora Tanaka', email: 'user@otakuhub.dev', role: 'customer', allowed: true },
+  { id: 3, name: 'Ken Restricted', email: 'blocked@otakuhub.dev', role: 'customer', allowed: false }
 ])
 </script>
 
@@ -13,20 +13,22 @@ const users = ref([
   <div class="users-table-container rounded-4 bg-white border shadow-sm p-4">
     <table class="table align-middle mb-0 custom-table">
       <thead>
-        <tr class="text-uppercase text-secondary tracking-wider fs-7">
-          <th scope="col" class="pb-3 border-0">Usuario</th>
+        <tr class="text-uppercase tracking-wider">
+          <th scope="col" class="pb-3 border-0 ps-3">Usuario</th>
           <th scope="col" class="pb-3 border-0">Rol</th>
           <th scope="col" class="pb-3 border-0">Estado</th>
-          <th scope="col" class="pb-3 border-0 text-end pe-3">Acceso</th>
+          <th scope="col" class="pb-3 border-0 text-end pe-4">Acceso</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="user in users" :key="user.id" class="align-middle">
-          <td class="py-3 border-bottom border-light">
+          <td class="py-3 border-bottom border-light ps-3">
             <div class="d-flex align-items-center gap-3">
-              <img :src="user.avatar" alt="Avatar" class="rounded-circle bg-light border" width="40" height="40">
+              <div class="avatar-user-fallback d-flex align-items-center justify-content-center rounded-circle fw-bold text-white">
+                {{ user.name.charAt(0) }}
+              </div>
               <div class="d-flex flex-column">
-                <span class="fw-bold text-dark lh-sm mb-0.5">{{ user.name }}</span>
+                <span class="fw-bold text-dark lh-sm mb-1">{{ user.name }}</span>
                 <span class="text-muted small lh-sm">{{ user.email }}</span>
               </div>
             </div>
@@ -50,7 +52,7 @@ const users = ref([
             </span>
           </td>
           
-          <td class="py-3 border-bottom border-light text-end pe-3">
+          <td class="py-3 border-bottom border-light text-end pe-4">
             <div class="form-check form-switch d-inline-block m-0 align-middle">
               <input 
                 class="form-check-input custom-switch" 
@@ -68,27 +70,37 @@ const users = ref([
 
 <style lang="scss" scoped>
 .users-table-container {
-  border-color: #e9ecef !important;
+  border-color: #f1f3f7 !important;
 }
 
 .custom-table {
   thead th {
     font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    color: #8a92a6;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    color: #949aae;
   }
+}
+
+// Círculos con las iniciales de los usuarios de la tabla
+.avatar-user-fallback {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  background: linear-gradient(135deg, #a78bfa, #c084fc); /* Un tono lila sutilmente más suave para la lista */
+  font-size: 14px;
 }
 
 // Estilos de los roles
 .bg-purple {
-  background-color: #635bff; // El tono lila del badge en tu captura
+  background-color: #635bff; 
 }
 
-// Badges de estado con bordes (Píldoras personalizadas)
+// Badges de estado con bordes limpios
 .badge-status {
   display: inline-block;
-  padding: 6px 16px;
+  padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.85rem;
   
@@ -105,13 +117,14 @@ const users = ref([
   }
 }
 
-// Interruptor lila corporativo
+// Interruptor lila reactivo
 .custom-switch {
   width: 2.8em;
   height: 1.4em;
   cursor: pointer;
   background-color: #e2e8f0;
   border-color: #cbd5e1;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
   
   &:checked {
     background-color: #7c4dff;
@@ -119,7 +132,7 @@ const users = ref([
   }
   
   &:focus {
-    box-shadow: 0 0 0 0.25rem rgba(124, 77, 255, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(124, 77, 255, 0.15);
   }
 }
 </style>
