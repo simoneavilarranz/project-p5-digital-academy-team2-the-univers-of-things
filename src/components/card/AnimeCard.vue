@@ -1,7 +1,5 @@
 <script setup>
 import FavoriteButton from './FavoriteButton.vue';
-<<<<<<< HEAD
-=======
 
 defineProps({
   anime: {
@@ -14,7 +12,6 @@ const displayedGenres = (genres) => {
   if (!genres) return []
   return genres.slice(0, 3)
 }
->>>>>>> feat/api-integration
 
 </script>
 
