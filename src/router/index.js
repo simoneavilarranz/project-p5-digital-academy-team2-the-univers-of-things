@@ -14,22 +14,32 @@ const router = createRouter({
       name: 'login',
       component: () => import('../views/LoginView.vue'),
     },
+    
+    // 🏢 Agrupamos la administración bajo un único Layout con la barra lateral
     {
-      path: '/admin/usuarios',
-      name: 'admin-users',
-      component: () => import('@/views/AdminUsersView.vue'),
+      path: '/admin',
+      component: () => import('@/views/AdminLayoutView.vue'), // Tu contenedor común
+      redirect: '/admin/destacados', // Si entran a /admin los manda aquí por defecto
+      children: [
+        {
+          path: 'usuarios',
+          name: 'admin-users',
+          component: () => import('@/views/AdminUsersView.vue'),
+        },
+        {
+          path: 'destacados',
+          name: 'admin-featured',
+          component: () => import('@/views/AdminFeaturedView.vue'),
+        },
+      ]
     },
-    {
-      path: '/admin/destacados',
-      name: 'admin-featured',
-      component: () => import('@/views/AdminFeaturedView.vue'),
-    },
+
     {
       path: '/anime/:id',
       name: 'anime-detail',
       component: () => import('@/views/DetailView.vue')
     },
-    // 👤 Añadimos tu nueva ruta para el panel de usuario
+    // 👤 Panel de usuario
     {
       path: '/dashboard/perfil',
       name: 'user-profile',
