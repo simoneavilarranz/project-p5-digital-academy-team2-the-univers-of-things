@@ -1,11 +1,29 @@
 <script setup>
+import { ref } from 'vue'
 import DashboardSidebar from '@/components/common/DashboardSidebar.vue'
 import AdminUsersTable from '@/components/admin/AdminUsersTable.vue'
+
+// Enlaces cortos del Administrador que configuramos al inicio
+const adminLinks = ref([
+  { to: '/admin/usuarios', label: 'Usuarios', icon: 'bi-people' },
+  { to: '/admin/destacados', label: 'Destacados', icon: 'bi-star' }
+])
+
+const adminData = ref({
+  name: 'Akira Admin',
+  email: 'admin@otakuhub.dev',
+  fallback: 'AA',
+  avatar: 'https://api.dicebear.com/7.x/bottts/svg?seed=Akira'
+})
 </script>
 
 <template>
   <div class="admin-layout">
-    <AdminSidebar />
+    <DashboardSidebar 
+      title="ADMIN PANEL" 
+      :links="adminLinks" 
+      :userData="adminData" 
+    />
 
     <div class="d-flex flex-column flex-grow-1 min-vh-100 bg-light">
       
@@ -27,7 +45,7 @@ import AdminUsersTable from '@/components/admin/AdminUsersTable.vue'
 
       <footer class="bg-light px-5 py-3 border-top mt-auto">
         <span class="text-muted small">&copy; 2026 OtakuHub &mdash; Panel privado.</span>
-      </footer>
+      </header>
     </div>
   </div>
 </template>
@@ -36,5 +54,6 @@ import AdminUsersTable from '@/components/admin/AdminUsersTable.vue'
 .admin-layout {
   display: flex;
   min-height: 100vh;
+  width: 100%;
 }
 </style>
