@@ -1,12 +1,13 @@
 <script setup>
-import { ref } from 'vue'
+import { useAuthStore } from '@/stores/auth'
 
-// Lista de usuarios con estados e iniciales preparadas
-const users = ref([
-  { id: 1, name: 'Akira Admin', email: 'admin@otakuhub.dev', role: 'admin', allowed: true },
-  { id: 2, name: 'Sora Tanaka', email: 'user@otakuhub.dev', role: 'customer', allowed: true },
-  { id: 3, name: 'Ken Restricted', email: 'blocked@otakuhub.dev', role: 'customer', allowed: false }
-])
+// Traemos la store global de Pinia
+const authStore = useAuthStore()
+
+// Manejamos el cambio del interruptor de forma limpia
+const alternarAcceso = (email) => {
+  authStore.toggleBlockUser(email)
+}
 </script>
 
 <template>
@@ -21,7 +22,7 @@ const users = ref([
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in users" :key="user.id" class="align-middle">
+        <tr v-for="user in authStore.users" :key="user.email" class="align-middle">
           <td class="py-3 border-bottom border-light ps-3">
             <div class="d-flex align-items-center gap-3">
               <div class="avatar-user-fallback d-flex align-items-center justify-content-center rounded-circle fw-bold text-white">
@@ -46,9 +47,9 @@ const users = ref([
           <td class="py-3 border-bottom border-light">
             <span 
               class="badge-status fw-semibold"
-              :class="user.allowed ? 'status-allowed' : 'status-restricted'"
+              :class="!user.isBlocked ? 'status-allowed' : 'status-restricted'"
             >
-              {{ user.allowed ? 'Acceso permitido' : 'Acceso restringido' }}
+              {{ !user.isBlocked ? 'Acceso permitido' : 'Acceso restringido' }}
             </span>
           </td>
           
@@ -58,7 +59,9 @@ const users = ref([
                 class="form-check-input custom-switch" 
                 type="checkbox" 
                 role="switch" 
-                v-model="user.allowed"
+                :checked="!user.isBlocked"
+                :disabled="user.role === 'admin'"
+                @change="alternarAcceso(user.email)"
               >
             </div>
           </td>
@@ -69,47 +72,40 @@ const users = ref([
 </template>
 
 <style lang="scss" scoped>
+
 .users-table-container {
   border-color: #f1f3f7 !important;
 }
 
-.custom-table {
-  thead th {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    color: #949aae;
-  }
+.custom-table thead th {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #949aae;
 }
 
-// Círculos con las iniciales de los usuarios de la tabla
 .avatar-user-fallback {
   width: 40px;
   height: 40px;
   min-width: 40px;
   min-height: 40px;
-  background: linear-gradient(135deg, #a78bfa, #c084fc); /* Un tono lila sutilmente más suave para la lista */
+  background: linear-gradient(135deg, #a78bfa, #c084fc);
   font-size: 14px;
 }
 
-// Estilos de los roles
-.bg-purple {
-  background-color: #635bff; 
-}
-
-// Badges de estado con bordes limpios
+.bg-purple { background-color: #635bff; }
 .badge-status {
   display: inline-block;
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.85rem;
-  
+
   &.status-allowed {
     background-color: #f0fdf4;
     color: #16a34a;
     border: 1px solid #bbf7d0;
   }
-  
+
   &.status-restricted {
     background-color: #fef2f2;
     color: #dc2626;
@@ -117,7 +113,6 @@ const users = ref([
   }
 }
 
-// Interruptor lila reactivo
 .custom-switch {
   width: 2.8em;
   height: 1.4em;
@@ -125,12 +120,12 @@ const users = ref([
   background-color: #e2e8f0;
   border-color: #cbd5e1;
   transition: background-color 0.2s ease, border-color 0.2s ease;
-  
+
   &:checked {
     background-color: #7c4dff;
     border-color: #7c4dff;
   }
-  
+
   &:focus {
     box-shadow: 0 0 0 0.25rem rgba(124, 77, 255, 0.15);
   }
