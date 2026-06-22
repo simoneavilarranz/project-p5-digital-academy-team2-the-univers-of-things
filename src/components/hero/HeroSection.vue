@@ -1,36 +1,43 @@
 <script setup>
-import LoginButton from '../login/LoginButton.vue'
-import WeeklyBadge from './WeeklyBadge.vue'
-import AnimeCard from '../card/AnimeCard.vue'
+import RegisterButton from "../register/RegisterButton.vue";
+import LoginButton from "../login/LoginButton.vue";
+import WeeklyBadge from "./WeeklyBadge.vue";
+import AnimeCard from "../card/AnimeCard.vue";
 
 // Importamos el store de administración de Pinia
-import { useAdminStore } from '@/stores/admin'
+import { useAdminStore } from "@/stores/admin";
 
 // Instanciamos el store para poder usarlo en el template
-const adminStore = useAdminStore()
+const adminStore = useAdminStore();
 </script>
 
 <template>
   <section class="hero">
     <div class="hero__content">
       <h1 class="hero__title">
-        Tu universo <span class="hero__title--highlight">anime</span>,<br>organizado.
+        Tu universo
+        <span class="hero__title--highlight">anime</span>,<br />organizado.
       </h1>
       <p class="hero__description">
-        Explora miles de series, guarda tus favoritas and valora cada una en tu propio dashboard.
+        Explora miles de series, guarda tus favoritas and valora cada una en tu
+        propio dashboard.
       </p>
-      
+
       <div class="hero__actions">
+        <RegisterButton label="Crear cuenta gratis" />
         <LoginButton />
       </div>
     </div>
 
     <div class="hero__featured">
       <WeeklyBadge />
-      
+
       <div class="weekly-card-slot">
-        <AnimeCard v-if="adminStore.weeklyAnime" :anime="adminStore.weeklyAnime" />
-        
+        <AnimeCard
+          v-if="adminStore.weeklyAnime"
+          :anime="adminStore.weeklyAnime"
+        />
+
         <div v-else class="text-center text-muted">
           ¡Selección disponible próximamente!
         </div>
@@ -59,7 +66,7 @@ const adminStore = useAdminStore()
     font-weight: 700;
 
     &--highlight {
-      color: #8a4fff; 
+      color: #8a4fff;
     }
   }
 
@@ -78,16 +85,16 @@ const adminStore = useAdminStore()
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 350px; 
+    width: 350px;
   }
 }
 
 .weekly-card-slot {
   width: 100%;
-  min-height: 400px; 
+  min-height: 400px;
   background: #ffffff;
   border: 1px solid #eaeaea;
-  border-top: none; 
+  border-top: none;
   border-radius: 0 0 8px 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   display: flex;
@@ -113,7 +120,6 @@ const adminStore = useAdminStore()
     &__featured {
       margin-top: 30px;
     }
-
   }
 }
 </style>
