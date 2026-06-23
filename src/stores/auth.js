@@ -22,6 +22,22 @@ export const useAuthStore = defineStore('auth', () => {
     ])
 
     const currentUser = ref(null)
+    
+    // Nuevo: Estado de favoritos
+    const favorites = ref([])
+
+    // Cargar favoritos desde localStorage al iniciar
+    const loadFavorites = () => {
+        const saved = localStorage.getItem('userFavorites')
+        if (saved) {
+            favorites.value = JSON.parse(saved)
+        }
+    }
+
+    // Guardar favoritos en localStorage
+    const saveFavorites = () => {
+        localStorage.setItem('userFavorites', JSON.stringify(favorites.value))
+    }
 
     function login(email, password) {
         const foundUser = users.value.find((user) => {
@@ -45,6 +61,9 @@ export const useAuthStore = defineStore('auth', () => {
             avatar: foundUser.avatar,
             isAuthenticated: true,
         }
+        
+        // Cargar favoritos al iniciar sesión
+        loadFavorites()
 
         return currentUser.value
     }
@@ -76,6 +95,10 @@ export const useAuthStore = defineStore('auth', () => {
             avatar: newUser.avatar,
             isAuthenticated: true,
         }
+        
+        // Inicializar favoritos vacíos para nuevo usuario
+        favorites.value = []
+        saveFavorites()
 
         return currentUser.value
     }
@@ -106,4 +129,64 @@ export const useAuthStore = defineStore('auth', () => {
 
     // Añadimos toggleBlockUser al return final
     return { users, currentUser, login, register, updateProfile, toggleBlockUser }
+    // Nuevas funciones para favoritos
+    
+    // Añadir un favorito
+    function addFavorite(animeData) {
+        // Verificar si ya existe
+        const exists = favorites.value.find(fav => fav.mal_id === animeData.mal_id)
+        if (exists) {
+            return { success: false, message: 'Este anime ya está en tus favoritos' }
+        }
+        
+        favorites.value.push({
+            id: Date.now(),
+            mal_id: animeData.mal_id,
+            title: animeData.title,
+            content: animeData.synopsis || animeData.content || 'Sin descripción disponible.',
+            image_url: animeData.images?.jpg?.image_url || animeData.image_url || '',
+            score: animeData.score || 0,
+            rating: animeData.rating || 0,
+            editing: false
+        })
+        
+        saveFavorites()
+        return { success: true, message: 'Añadido a favoritos correctamente' }
+    }
+
+    // Eliminar un favorito
+    function removeFavorite(id) {
+        favorites.value = favorites.value.filter(fav => fav.id !== id)
+        saveFavorites()
+    }
+
+    // Actualizar un favorito
+    function updateFavorite(id, data) {
+        const index = favorites.value.findIndex(fav => fav.id === id)
+        if (index !== -1) {
+            favorites.value[index] = { ...favorites.value[index], ...data }
+            saveFavorites()
+        }
+    }
+
+    // Verificar si un anime está en favoritos
+    function isFavorite(malId) {
+        return favorites.value.some(fav => fav.mal_id === malId)
+    }
+
+    // Cargar favoritos al inicializar el store
+    loadFavorites()
+
+    return { 
+        users, 
+        currentUser, 
+        favorites,
+        login, 
+        register, 
+        updateProfile,
+        addFavorite,
+        removeFavorite,
+        updateFavorite,
+        isFavorite
+    }
 })
