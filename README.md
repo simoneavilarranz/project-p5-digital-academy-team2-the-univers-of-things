@@ -1,63 +1,57 @@
-# the Univers of things-T2
+# The Univers of Things
 
-This template should help get you started developing with Vue 3 in Vite.
+The Univers of Things is a fully responsive **Single Page Application (SPA)** built with **Vue.js**. It provides a public anime catalog and a private favorites area protected by user authentication.
 
-## Recommended IDE Setup
+Users can search, filter, and browse anime with pagination, manage their favorites, and update their profile and password. Admin users have access to a dedicated dashboard for user management and featured-content configuration.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+The project was developed using an Agile workflow, organized into **two two-week sprints**, with planning and task tracking managed in Jira.
 
-## Recommended Browser Setup
+## ✨ Features
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- Responsive public anime catalog
+- Search, filtering, and pagination
+- User registration and authentication
+- Personal dashboard and profile management
+- Favorites management and rating
+- Admin dashboard for users and featured content
 
-## Customize configuration
+## 🛠️ Tech Stack
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- **Frontend:** HTML5, CSS3, Sass, Bootstrap, Vue.js
+- **State Management:** Pinia
+- **Routing:** Vue Router
+- **Unit Testing:** Vitest
+- **End-to-End Testing:** Playwright
+- **Build Tool:** Vite
+- **Version Control:** Git and GitHub
 
-## Project Setup
+## 📚 Documentation
 
-```sh
-npm install
-```
+The complete project documentation is available in the Wiki:
 
-### Compile and Hot-Reload for Development
+- [Complete documentation in the Wiki](https://github.com/Alexapop/project-p5-digital-academy-team2-the-univers-of-things/wiki)
 
-```sh
-npm run dev
-```
+The Wiki is organized into the following sections:
 
-### Compile and Minify for Production
+- [Getting Started](https://github.com/Alexapop/project-p5-digital-academy-team2-the-univers-of-things/wiki/Getting-Started)
+- [Features](https://github.com/Alexapop/project-p5-digital-academy-team2-the-univers-of-things/wiki/Features)
+- [Architecture](https://github.com/Alexapop/project-p5-digital-academy-team2-the-univers-of-things/wiki/Architecture)
+- [Testing](https://github.com/Alexapop/project-p5-digital-academy-team2-the-univers-of-things/wiki/Testing)
+- [Project Management](https://github.com/Alexapop/project-p5-digital-academy-team2-the-univers-of-things/wiki/Project-Management)
+- [Deployment](https://github.com/Alexapop/project-p5-digital-academy-team2-the-univers-of-things/wiki/Deployment)
 
-```sh
-npm run build
-```
+## 🚀 Usage
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+You can try the application from [GitHub Pages](https://factoriaf5-asturias.github.io/project-p5-digital-academy-team2-the-univers-of-things/) using the demo credentials.
 
-```sh
-npm run test:unit
-```
+| Role | Email | Password |
+| --- | --- | --- |
+| User | `user@otakuhub.dev` | `user1234` |
+| Admin | `admin@otakuhub.dev` | `admin123` |
 
-### Run End-to-End Tests with [Playwright](https://playwright.dev)
+## 👩‍💻 Authors
 
-```sh
-# Install browsers for the first run
-npx playwright install
-
-# When testing on CI, must build the project first
-npm run build
-
-# Runs the end-to-end tests
-npm run test:e2e
-# Runs the tests only on Chromium
-npm run test:e2e -- --project=chromium
-# Runs the tests of a specific file
-npm run test:e2e -- tests/example.spec.ts
-# Runs the tests in debug mode
-npm run test:e2e -- --debug
-```
+- [Andrea](https://github.com/AndreaVaGo)
+- [Hanna](https://github.com/hannafr14)
+- [Ioana](https://github.com/Alexapop)
+- [Simone](https://github.com/simoneavilarranz)

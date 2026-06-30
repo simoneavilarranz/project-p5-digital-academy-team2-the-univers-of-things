@@ -73,6 +73,7 @@ export const useAnimeStore = defineStore('anime', {
             this.fetchAnimes(page)
         },
 
+        // 3. Guarda los destacados permanentemente en el navegador
         updateAdminSelections(nuevosDestacados, nuevoAnimeSemana) {
             if (nuevosDestacados) {
                 this.featuredAnimes = nuevosDestacados
